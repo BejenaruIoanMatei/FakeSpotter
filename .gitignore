@@ -25,3 +25,9 @@ media/
 
 # Tasks
 tasks.md
+
+# Models
+classifier/models/*
+
+# MacOS
+.DS_Store
