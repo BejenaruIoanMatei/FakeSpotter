@@ -1,18 +1,32 @@
-{% extends "blog/base.html" %}
-{% block content %}
-  <h2>Upload Image for Classification</h2>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Classify</button>
-  </form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Image Detector</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+        .image-preview { max-width: 100%; height: auto; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Fake Image Detector</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Check Image</button>
+    </form>
 
-  {% if classifier %}
-    <hr>
-    <h3>Latest Classification</h3>
-    <img src="{{ classifier.image.url }}" alt="Uploaded Image" width="300">
-    <p><strong>Label:</strong> {{ classifier.predicted_label }}</p>
-    <p><strong>Confidence:</strong> {{ classifier.confidence|floatformat:2 }}</p>
-    <p><strong>Uploaded:</strong> {{ classifier.uploaded_at }}</p>
-  {% endif %}
-{% endblock %}
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+    <div class="result">
+        <h2>Result:</h2>
+        <p><strong>Prediction:</strong> {{ result.predicted_label }}</p>
+        <p><strong>Confidence:</strong> {{ result.confidence|floatformat:2 }}%</p>
+        <img src="{{ image_url }}" class="image-preview">
+    </div>
+    {% endif %}
+</body>
+</html>

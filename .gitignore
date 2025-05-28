@@ -28,6 +28,8 @@ tasks.md
 
 # Models
 classifier/models/*
+detector/models/*
 
 # MacOS
 .DS_Store
+

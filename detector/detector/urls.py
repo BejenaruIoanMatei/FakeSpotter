@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from blog.views import ClassifierView
 
 urlpatterns = [
-    path('classify/', ClassifierView.as_view(), name='blog-classifier'),
+    path('classify/', ClassifierView.as_view(), name='classify'),
 ]
 
 if settings.DEBUG:
