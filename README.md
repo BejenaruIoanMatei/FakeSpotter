@@ -17,7 +17,7 @@ If you are curious about the models you can find the google colab notebook here:
 
 ### Model Training
 
-- Model training and evaluation were performed in a Jupyter Notebook because locally would've been impossible for me (hardware not good enough on my machine so i used cloud resources)
+- Model training and evaluation were done in a jupyter notebook using google colab due to local hardware limitations (my machine is not that great).
 
 > **Note:** This project won’t run locally out-of-the-box, as it uses pretrained models that were downloaded and saved locally (not committed to the repository)
 
