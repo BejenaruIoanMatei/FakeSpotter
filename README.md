@@ -23,3 +23,4 @@ If you are curious about the models you can find the google colab notebook here:
 
 ### Demo video
 
+Link to demo: [FakeSpotterDemo](https://drive.google.com/file/d/1U4um_sSfgT2GiO9d0UellwZTQPimJ-aD/view?usp=drive_link)
