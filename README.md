@@ -7,6 +7,8 @@ The system supports image classification powered by convolutional neural network
 
 If you are curious about the models you can find the google colab notebook here: [FakeSpotterNotebook](https://colab.research.google.com/drive/1nizvdocMwvu0jHFwLm4kl41wXcCbPnZd?usp=sharing)
 
+> **Note:**The Django implementation is not production-ready yet, but I do plan to optimize it further. For now, it serves as a simple web app to showcase the core feature — detecting fake images of people.
+
 ### Features
 
 - Web interface built with Django
