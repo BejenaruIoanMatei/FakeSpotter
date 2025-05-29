@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 from .models import ImageClassification
-from .fake_spotter_utils import classify_image_correctly
+from .fake_spotter_utils import classifier
 
 class ClassifierView(View):
     template_name = 'blog/classifier.html'
@@ -17,9 +17,9 @@ class ClassifierView(View):
         classification = ImageClassification(image=image_file)
         classification.save()
 
-        label, confidence = classify_image_correctly(classification.image.path)
-        classification.predicted_label = label
-        classification.confidence = confidence
+        label_info = classifier.predict(classification.image.path)
+        classification.predicted_label = label_info['label']
+        classification.confidence = label_info['confidence']
         classification.save()
 
         return render(request, self.template_name, {

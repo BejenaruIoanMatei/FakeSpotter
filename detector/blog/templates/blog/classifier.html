@@ -1,32 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake Image Detector</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
-        .image-preview { max-width: 100%; height: auto; margin-top: 10px; }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/detector.css' %}">
 </head>
 <body>
-    <h1>Fake Image Detector</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Check Image</button>
-    </form>
+    <div class="container">
+        <h1>Fake Image Detector</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="upload-section">
+            {% csrf_token %}
+            <div class="file-input-wrapper">
+                <input type="file" name="image" accept="image/*" required class="file-input" id="imageInput">
+                <label for="imageInput" class="file-input-label">
+                  Choose Image
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Analyze Image</button>
+        </form>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
 
-    {% if result %}
-    <div class="result">
-        <h2>Result:</h2>
-        <p><strong>Prediction:</strong> {{ result.predicted_label }}</p>
-        <p><strong>Confidence:</strong> {{ result.confidence|floatformat:2 }}%</p>
-        <img src="{{ image_url }}" class="image-preview">
+        {% if result %}
+        <div class="result">
+            <h2>Analysis Result</h2>
+            <p>
+                <strong>Prediction:</strong> 
+                <span class="prediction-value {% if result.predicted_label == 'Real' %}prediction-real{% else %}prediction-fake{% endif %}">
+                    {{ result.predicted_label }}
+                </span>
+            </p>
+            <p>
+                <strong>Confidence:</strong> 
+                <span class="confidence-value">{{ result.confidence|floatformat:2 }}%</span>
+            </p>
+            <img src="{{ image_url }}" class="image-preview" alt="Analyzed image">
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
+
+    <script src="{% static 'blog/js/detector.js' %}"></script>
 </body>
 </html>
