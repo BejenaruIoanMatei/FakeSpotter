@@ -6,7 +6,7 @@ import numpy as np
 
 class TensorflowInceptionClassifier:
     def __init__(self):
-        model_path = 'models/best_model.h5'
+        model_path = 'models/inception_fakespotter_tf_v2.h5'
         self.model = load_model(model_path)
 
     def preprocess(self, image_file):
@@ -22,7 +22,7 @@ class TensorflowInceptionClassifier:
             predicted_class = int(np.argmax(preds))
             confidence = float(np.max(preds))
             return {
-                "label": "Real" if predicted_class == 0 else "Fake",
+                "label": "Real" if predicted_class == 1 else "Fake",
                 "confidence": confidence,
                 "probabilities": preds[0].tolist()
             }
